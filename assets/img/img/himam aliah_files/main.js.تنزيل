@@ -1,0 +1,98 @@
+'use strict'
+// I will be creating a different pen with touch support but right // now I have no time for it due to school
+
+// I will be creating a different pen with touch support but right // now I have no time for it due to school
+const slider = document.querySelector('.slider');
+const items = document.querySelectorAll('.item');
+const btns = document.querySelectorAll('.btn');
+const circle = document.querySelector('.circle1');
+const circle1 = document.querySelector('.circle2');
+const circle2 = document.querySelector('.circle3');
+const circleHeader = document.querySelector('.circle-header');
+const circle1Header = document.querySelector('.circle1-header');
+const circle2Header = document.querySelector('.circle2-header');
+$(document).ready(function() {
+    var movementStrength = 25;
+    var height = movementStrength / $(window).height();
+    var width = movementStrength / $(window).width();
+    $("#top-image").mousemove(function(e){
+    var pageX = e.pageX - ($(window).width() / 2);
+    var pageY = e.pageY - ($(window).height() / 2);
+    var newvalueX = width * pageX * -1 - (-5);
+    var newvalueY = height * pageY * -1 - 20;
+    $('#top-image').css("background-position", newvalueX+"px     "+newvalueY+"px");
+});
+});
+$('.button--border').removeClass('in');
+
+$(document).ready(function() {
+setTimeout(function() {
+$('.button--border').addClass('in');
+setTimeout(function() {
+  $('.button--border').addClass('ready');
+},500)
+},1000)
+})
+function reset() {
+  for (let i = 0; i < items.length; i++) {
+    btns[i].classList.remove('expand');
+    items[i].classList.remove('animation');
+  } 
+}
+
+function animate(i) {
+  btns[i].classList.add('expand');
+  items[i].classList.add('animation');
+}
+
+function scrollTo(i) {
+  slider.style.transform = `translateX(${-i * slider.offsetWidth}px)`;
+  reset();
+  animate(i);
+}
+
+const activate = (e) => e.target.matches('.btn') && scrollTo(e.target.dataset.index);
+
+const init = () => animate(0);
+
+window.addEventListener('load',init,false);
+window.addEventListener('click',activate,false);
+
+circle.addEventListener('click',() =>{
+  circleHeader.classList.toggle('hide');
+}) 
+circle1.addEventListener('click',() =>{
+  circle1Header.classList.toggle('hide');
+}) 
+circle2.addEventListener('click',() =>{
+  circle2Header.classList.toggle('hide');
+}) 
+const layout = document.querySelector('.layout');
+const map = document.getElementById('map');
+const mapp = document.querySelector('.mapp')
+const close = document.querySelector('.close')
+
+map.addEventListener('click',()=> {
+  layout.classList.remove('hide');
+  mapp.classList.remove('hide')
+  close.classList.remove('hide')
+});
+layout.addEventListener('click',()=> {
+  layout.classList.add('hide')
+  mapp.classList.add('hide')
+  close.classList.add('hide')
+  navA.style.display = `none`;
+});
+
+close.addEventListener('click',()=> {
+  layout.classList.add('hide');
+  mapp.classList.add('hide')
+  close.classList.add('hide')
+});
+const navImg = document.querySelector('.nav-menu');
+const navA = document.querySelector('nav');
+
+navImg.addEventListener('click',()=> {
+  navA.style.display = `flex`;
+  layout.classList.remove('hide');
+})
